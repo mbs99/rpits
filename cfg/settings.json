@@ -1,5 +1,6 @@
 {
     "UpdateUrl" : "https://weatherstation.wunderground.com/weatherstation/updateweatherstation.php",
     "ID" : "IROTAMSE4",
-    "PWD" : "m6s68ezf"
+    "PWD" : "m6s68ezf",
+    "Device" : "file.txt"
 }
