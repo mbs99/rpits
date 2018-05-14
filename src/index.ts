@@ -1,5 +1,5 @@
-'use strict';
-import { ExpressApp } from './ExpressApp'
+import { ExpressApp } from "./ExpressApp";
+import { CronApp } from "./CronApp";
 
 if (2 === process.argv.length) {
     const app = new ExpressApp();
@@ -7,8 +7,7 @@ if (2 === process.argv.length) {
 }
 else {
     if("cron" === process.argv[2]) {
-        console.log("xxx");
+        const app = new CronApp();
+        app.updateWeatherUnderground();
     }
 }
-
-
