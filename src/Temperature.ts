@@ -2,8 +2,8 @@ export class Temperature {
     public dTemp :number;
     public fTemp: number;
 
-    constructor(fTemp : number) {
-        this.dTemp = ((fTemp / 1000.0) * 9 / 5.0) + 32;;
-        this.fTemp = fTemp;
+    constructor(dTemp : number) {
+        this.dTemp = dTemp
+        this.fTemp = dTemp * 1.8 +32;
     }
 }

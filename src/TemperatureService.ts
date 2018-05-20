@@ -22,8 +22,8 @@ export class TemperatureService {
             }
             else {
                 const parser = new Parser();
-                const fTemp = parser.parse(new String(data));
-                const temperatureResponse = new Temperature(Number(fTemp) / 1000.0);
+                const dTemp = parser.parse(new String(data));
+                const temperatureResponse = new Temperature(Number(dTemp) / 1000.0);
                 callback(null, temperatureResponse);
             }
         });
