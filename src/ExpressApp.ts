@@ -9,10 +9,12 @@ export class ExpressApp {
     private process = require('process');
     private port = this.process.env.PORT || 3000
     private express = express();
-    private settings: any;
+    private settings: Settings;
+    private temperatureService: TemperatureService;
 
     constructor(settings: Settings) {
         this.settings = settings;
+        this.temperatureService = new TemperatureService(settings);
     }
 
     public listen() {
@@ -27,18 +29,36 @@ export class ExpressApp {
     }
 
     private mountRoutes(): void {
+        const temperatureService = new TemperatureService(this.settings);
         const router = express.Router();
-        router.get('/', (req, res) => {
-            const temperatureService = new TemperatureService(this.settings);
-            temperatureService.getTemperature((err, data) => {
-                if (err) {
-                    res.status(500).json(err);
-                }
-                else {
-                    res.json(data);
+        router.get('/temperature', (req, res) => {
+            res.format({
+                text: function(){
+                    
+                    temperatureService.getTemperature((err, data) => {
+                        if (err) {
+                            res.status(500).send(err);
+                        }
+                        else {
+                            res.send(data);
+                        }
+                    });
+                },
+            
+                json: function(){
+                    temperatureService.getTemperature((err, data) => {
+                        if (err) {
+                            res.status(500).json(err);
+                        }
+                        else {
+                            res.json(data);
+                        }
+                    });
                 }
             });
-        })
-        this.express.use('/', router)
+        });
+
+        this.express.use(express.static('public'));
+        this.express.use('/api', router);
     }
 }
