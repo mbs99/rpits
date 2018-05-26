@@ -18,7 +18,7 @@
             let temperature = JSON.parse(request.responseText);
             new RGraph.Thermometer({
                 id: 'cvs',
-                min: -10,
+                min: -30,
                 max: 40,
                 value: temperature.dTemp,
                 options: {
